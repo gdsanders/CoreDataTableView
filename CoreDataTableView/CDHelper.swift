@@ -31,7 +31,7 @@ class CDHelper  {
     lazy var modelURL: NSURL = {
         let bundle = NSBundle.mainBundle()
         
-        if let url = bundle.URLForResource("Main", withExtension: "momd") {
+        if let url = bundle.URLForResource("Model", withExtension: "momd") {
             return url
         }
         print("CRITICAL - Managed Object Not Found!")

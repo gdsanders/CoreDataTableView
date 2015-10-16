@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let nav = self.window?.rootViewController as! UINavigationController
         let vc = nav.viewControllers[0] as! ViewController
         let context = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
+        context.persistentStoreCoordinator = CDHelper.sharedInstance.coordinator
         vc.context = context
         
         
