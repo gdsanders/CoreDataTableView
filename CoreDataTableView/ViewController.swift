@@ -26,6 +26,10 @@ class ViewController: UIViewController {
         tableView.frame = view.frame
         
         view.addSubview(tableView)
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: Selector ("toggleEdit"))
@@ -57,7 +61,45 @@ class ViewController: UIViewController {
         newNameAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: addNewUser))
         presentViewController(newNameAlert, animated: true, completion: nil)
     }
-
+    
+    func addNewUser(alert: UIAlertAction!) {
+        guard let name = newNameInput?.text else {return}
+        names.append(name)
+        tableView.reloadData()
+    }
 
 }
+
+extension ViewController: UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return names.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        cell.textLabel?.text = names[indexPath.row]
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+}
+
+extension ViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            names.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }
+    }
+}
+
+
+
+
+
 
