@@ -44,6 +44,8 @@ class ViewController: UIViewController {
     
     func toggleEdit() {
         tableView.setEditing(!tableView.editing, animated: true)
+        let title = tableView.editing ? "Done" : "Edit"
+        navigationItem.leftBarButtonItem?.title = title
     }
 
 
