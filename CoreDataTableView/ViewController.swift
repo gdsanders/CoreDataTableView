@@ -47,6 +47,16 @@ class ViewController: UIViewController {
         let title = tableView.editing ? "Done" : "Edit"
         navigationItem.leftBarButtonItem?.title = title
     }
+    
+    func insertNewObject(sender: AnyObject) {
+        let newNameAlert = UIAlertController(title: "Add New User", message: "What's the user's name?", preferredStyle: UIAlertControllerStyle.Alert)
+        newNameAlert.addTextFieldWithConfigurationHandler { (alertTextField) -> Void in
+            self.newNameInput = alertTextField
+        }
+        newNameAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+        newNameAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: addNewUser))
+        presentViewController(newNameAlert, animated: true, completion: nil)
+    }
 
 
 }
