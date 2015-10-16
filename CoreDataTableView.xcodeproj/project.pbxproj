@@ -14,6 +14,8 @@
 		632E992B1BD15915007BCE45 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 632E99291BD15915007BCE45 /* LaunchScreen.storyboard */; };
 		632E99331BD16A0E007BCE45 /* CDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632E99321BD16A0E007BCE45 /* CDHelper.swift */; settings = {ASSET_TAGS = (); }; };
 		632E99361BD16A39007BCE45 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 632E99341BD16A39007BCE45 /* Model.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		632E99391BD16ACA007BCE45 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632E99371BD16ACA007BCE45 /* User+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		632E993A1BD16ACA007BCE45 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632E99381BD16ACA007BCE45 /* User.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		632E992C1BD15915007BCE45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		632E99321BD16A0E007BCE45 /* CDHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDHelper.swift; sourceTree = "<group>"; };
 		632E99351BD16A39007BCE45 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		632E99371BD16ACA007BCE45 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		632E99381BD16ACA007BCE45 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +46,8 @@
 		632E99141BD15915007BCE45 = {
 			isa = PBXGroup;
 			children = (
+				632E99371BD16ACA007BCE45 /* User+CoreDataProperties.swift */,
+				632E99381BD16ACA007BCE45 /* User.swift */,
 				632E991F1BD15915007BCE45 /* CoreDataTableView */,
 				632E991E1BD15915007BCE45 /* Products */,
 			);
@@ -143,7 +149,9 @@
 			files = (
 				632E99231BD15915007BCE45 /* ViewController.swift in Sources */,
 				632E99211BD15915007BCE45 /* AppDelegate.swift in Sources */,
+				632E993A1BD16ACA007BCE45 /* User.swift in Sources */,
 				632E99331BD16A0E007BCE45 /* CDHelper.swift in Sources */,
+				632E99391BD16ACA007BCE45 /* User+CoreDataProperties.swift in Sources */,
 				632E99361BD16A39007BCE45 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

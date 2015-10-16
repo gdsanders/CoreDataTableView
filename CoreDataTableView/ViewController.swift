@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
     
@@ -14,7 +15,7 @@ class ViewController: UIViewController {
     let tableView = UITableView()
     var newNameInput: UITextField?
     
-    
+    var context: NSManagedObjectContext?
     
 
     override func viewDidLoad() {
