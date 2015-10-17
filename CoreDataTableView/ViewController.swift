@@ -124,7 +124,7 @@ extension ViewController: UITableViewDelegate {
             do {
                 try context?.save()
             } catch {
-                print("There was a problem saving.")
+                print("There was a problem saving the item.")
                 return
             }
             
