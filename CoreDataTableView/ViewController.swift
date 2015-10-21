@@ -43,16 +43,21 @@ class ViewController: UIViewController {
             let request = NSFetchRequest(entityName: "User")
             request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: "FetchedResultsTableView")
+           
+           fetchedResultsController?.delegate = self
+            
+            // Perform fetch request
+            
+            do {
+                try fetchedResultsController?.performFetch()
+            }
+            catch {
+                print("There was a problem fetching data")
+            }
+
         }
         
-        // Perform fetch request
         
-        do {
-            try fetchedResultsController?.performFetch()
-        }
-        catch {
-            print("There was a problem fetching data")
-        }
         
         
 // Old code utilizing NSFetchRequest
@@ -151,25 +156,51 @@ extension ViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             
-            let user = users[indexPath.row]
-            context?.deleteObject(user)
-            
-            do {
-                try context?.save()
-            } catch {
-                print("There was a problem saving the item.")
-                return
+            if let object = fetchedResultsController?.objectAtIndexPath(indexPath) as? User, context = context {
+                
+                context.deleteObject(object)
+                
+                do {
+                    try context.save()
+                } catch {
+                    print("There was a problem saving the item.")
+                    return
+                }
+
             }
             
-            
-            users.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
     }
 }
 
 
-
+extension ViewController: NSFetchedResultsControllerDelegate {
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+       
+        tableView.beginUpdates()
+        
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        switch type {
+            
+        case .Insert:
+            
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Fade)
+        
+        case .Delete:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Fade)
+        default: break
+            
+        }
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        tableView.endUpdates()
+    }
+    
+}
 
 
 
