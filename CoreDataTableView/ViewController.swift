@@ -120,6 +120,17 @@ class ViewController: UIViewController {
 
 }
 
+func editUser (user: User) {
+    let updateNameAlert = UIAlertController(title: "Edit User", message: "What's the user's name?", preferredStyle: UIAlertControllerStyle.Alert)
+    var updatedNameInput: UITextField?
+    
+    updateNameAlert.addTextFieldWithConfigurationHandler { (textField) -> Void in
+        textField.text = user.name
+    }
+    updateNameAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+    
+}
+
 extension ViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
