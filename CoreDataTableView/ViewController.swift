@@ -84,11 +84,13 @@ class ViewController: UIViewController {
     func addNewUser(alert: UIAlertAction!) {
        
         guard let name = newNameInput?.text else {return}
+        
         guard let context = context else {return}
         guard let user = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context)
             as? User else {return}
         
         user.name = name
+        
         do {
             try context.save()
         }
@@ -97,8 +99,7 @@ class ViewController: UIViewController {
                 return
         }
         
-        users.append(user)
-        tableView.reloadData()
+        
     }
 
 }
