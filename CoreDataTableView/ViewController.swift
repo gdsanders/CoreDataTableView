@@ -43,8 +43,19 @@ class ViewController: UIViewController {
             let request = NSFetchRequest(entityName: "User")
             request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: "FetchedResultsTableView")
-            
         }
+        
+        // Perform fetch request
+        
+        do {
+            try fetchedResultsController?.performFetch()
+        }
+        catch {
+            print("There was a problem fetching data")
+        }
+        
+        
+// Old code utilizing NSFetchRequest
         
 //        do {
 //            let request = NSFetchRequest(entityName: "User")
