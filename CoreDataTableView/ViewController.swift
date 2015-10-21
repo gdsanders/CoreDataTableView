@@ -106,12 +106,25 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        
+        
+        guard let sections = fetchedResultsController?.sections
+            else {return 0}
+    
+        let currentSection = sections[section]
+        return currentSection.numberOfObjects
+        
     }
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-        cell.textLabel?.text = users[indexPath.row].name
+        
+        if let user = fetchedResultsController?.objectAtIndexPath(indexPath) as? User {
+            cell.textLabel?.text = user.name
+        }
+        
+        
         return cell
     }
     
