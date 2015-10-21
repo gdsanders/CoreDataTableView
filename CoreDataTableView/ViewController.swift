@@ -14,8 +14,9 @@ class ViewController: UIViewController {
     var users = [User]()
     let tableView = UITableView()
     var newNameInput: UITextField?
-    
     var context: NSManagedObjectContext?
+    var fetchedResultsController: NSFetchedResultsController?
+    
     
 
     override func viewDidLoad() {
@@ -38,14 +39,21 @@ class ViewController: UIViewController {
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
         navigationItem.rightBarButtonItem = addButton
         
-        do {
+        if let context = context {
             let request = NSFetchRequest(entityName: "User")
-            if let result = try context?.executeFetchRequest(request) as? [User] {
-                users = result
-            }
-        } catch {
-                print("Fetch failed!")
-            }
+            request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: "FetchedResultsTableView")
+            
+        }
+        
+//        do {
+//            let request = NSFetchRequest(entityName: "User")
+//            if let result = try context?.executeFetchRequest(request) as? [User] {
+//                users = result
+//            }
+//        } catch {
+//                print("Fetch failed!")
+//            }
         
         
         
