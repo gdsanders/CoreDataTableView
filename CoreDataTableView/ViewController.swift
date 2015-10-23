@@ -128,7 +128,22 @@ func editUser (user: User) {
         textField.text = user.name
     }
     updateNameAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+    updateNameAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(okActionAlert) -> Void in}))
     
+    
+}
+
+func updateUser (name: String? , user: User) {
+    guard let name = name else {return}
+    guard let context = context else {return}
+    
+    user.name = name
+    do {
+        try context.save()
+    } catch {
+        print("There was a problem saving")
+    
+    }
 }
 
 extension ViewController: UITableViewDataSource {
