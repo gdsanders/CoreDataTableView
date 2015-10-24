@@ -135,6 +135,7 @@ func editUser (user: User) {
 
 func updateUser (name: String? , user: User) {
     guard let name = name else {return}
+
     guard let context = context else {return}
     
     user.name = name
