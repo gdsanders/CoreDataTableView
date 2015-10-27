@@ -118,7 +118,7 @@ class ViewController: UIViewController {
         
     }
 
-}
+
 
 func editUser (user: User) {
     let updateNameAlert = UIAlertController(title: "Edit User", message: "What's the user's name?", preferredStyle: UIAlertControllerStyle.Alert)
@@ -134,16 +134,19 @@ func editUser (user: User) {
 }
 
 func updateUser (name: String? , user: User) {
+   
     guard let name = name else {return}
 
     guard let context = context else {return}
+   
     
     user.name = name
     do {
         try context.save()
-    } catch {
+        } catch {
         print("There was a problem saving")
     
+        }
     }
 }
 
@@ -174,9 +177,10 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
-    }
+        }
     
-}
+    }
+
 
 extension ViewController: UITableViewDelegate {
     
