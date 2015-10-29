@@ -125,13 +125,19 @@ func editUser (user: User) {
     var updatedNameInput: UITextField?
     
     updateNameAlert.addTextFieldWithConfigurationHandler { (textField) -> Void in
+        updatedNameInput = textField
         textField.text = user.name
     }
     updateNameAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
-    updateNameAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(okActionAlert) -> Void in}))
+    updateNameAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(okActionAlert) -> Void in
+    self.updateUser(updatedNameInput?.text, user: user)
     
+    }))
+    presentViewController(updateNameAlert, animated: true, completion: nil)
     
 }
+    
+
 
 func updateUser (name: String? , user: User) {
    
@@ -143,7 +149,7 @@ func updateUser (name: String? , user: User) {
     user.name = name
     do {
         try context.save()
-        } catch {
+    } catch {
         print("There was a problem saving")
     
         }
@@ -201,6 +207,10 @@ extension ViewController: UITableViewDelegate {
             }
             
         }
+    }
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        guard let user = fetchedResultsController?.objectAtIndexPath(indexPath) as? User else {return}
+        editUser(user)
     }
 }
 
